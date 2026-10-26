@@ -34,4 +34,7 @@ jobs:
         run: |
           dockerfile-doctor --version
           dockerfile-doctor --help
-          echo "FROM python:3.11-slim" | dockerfile-doctor lint -
+          printf "FROM python:3.11-slim\nUSER 10001\n" | dockerfile-doctor lint -
+          echo "FROM python:3.11-slim" | dockerfile-doctor lint --fail-on error -
+          echo "FROM python:3.11-slim" | dockerfile-doctor fix -
+          printf "FROM alpine:3.19\nUSER 10001\n" | dockerfile-doctor scan -
